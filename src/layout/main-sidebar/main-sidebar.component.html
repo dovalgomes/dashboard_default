@@ -1,0 +1,135 @@
+<!-- Main Sidebar Container -->
+<aside class="main-sidebar sidebar-dark-primary elevation-4">
+  <a class="brand-link">
+    <span style="color: white" class="brand-text font-weight-light">Dashboard Default</span>
+  </a>
+
+  <div class="sidebar">
+    <!-- Sidebar user panel (optional) -->
+    <!-- <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+        <div class="image">
+          <img src="./../../assets/img/user.png" class="img-circle elevation-2" alt="User Image">
+        </div>
+        <div class="info">
+          <a  href="javascript:void(0)" class="d-block">Alexander Pierce</a>
+        </div> -->
+  </div>
+  <!-- Sidebar Menu -->
+  <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+    <div class="image">
+      <img
+        src="https://i0.wp.com/www.winhelponline.com/blog/wp-content/uploads/2017/12/user.png?fit=256%2C256&quality=100&ssl=1"
+        class="img-circle elevation-2" alt="User Image">
+    </div>
+    <div class="info">
+      <a href="#" class="d-block">{{user.name}}</a>
+    </div>
+  </div>
+  <nav class="mt-2">
+    <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+      <li class="nav-item">
+        <a routerLink="main" routerLinkActive="active" class="nav-link">
+          <i class="nav-icon fas fa-tachometer-alt"></i>
+          <p>Dashboard</p>
+        </a>
+      </li>
+      <!-- <li class="nav-header">SECRETARIA</li>
+      <li class="nav-item">
+          <a routerLink="studants" routerLinkActive="active" class="nav-link">
+              <i class="nav-icon fas fa-user-graduate"></i>
+          <p>Alunos</p>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a routerLink="registration" class="nav-link" routerLinkActive="active">
+          <i class="fas fa-user-plus nav-icon"></i>
+          <p>Matricular</p>
+        </a>
+      </li>
+      <li class="nav-item">
+          <a routerLink="student-team" class="nav-link" routerLinkActive="active">
+            <i class="fas fa-users nav-icon"></i>
+            <p>Turmas</p>
+          </a>
+        </li>
+      <li class="nav-header">ADMINISTRAÇÃO DO SISTEMA</li>
+      <li class="nav-item has-treeview">
+        <a href="javascript:void(0)" class="nav-link">
+          <i class="nav-icon far fa-plus-square"></i>
+          <p>
+            Cadastros auxiliares
+            <i class="fas fa-angle-left right"></i>
+          </p>
+        </a>
+        <ul class="nav nav-treeview">
+          <li class="nav-item pl-3">
+            <a routerLink="attendance" class="nav-link" routerLinkActive="active">
+              <i class="fas fa-warehouse nav-icon"></i>
+              <p>Centros de atendimentos</p>
+            </a>
+          </li>
+          <li class="nav-item pl-3">
+              <a routerLink="disease" class="nav-link" routerLinkActive="active">
+                <i class="fas fa-book-medical nav-icon"></i>
+                <p>CID`s</p>
+              </a>
+            </li>
+          <li class="nav-item pl-3">
+            <a routerLink="schools" class="nav-link" routerLinkActive="active">
+              <i class="fas fa-school nav-icon"></i>
+              <p>Escolas</p>
+            </a>
+          </li>
+
+          <li class="nav-item pl-3">
+            <a routerLink="medicines" class="nav-link" routerLinkActive="active">
+              <i class="fas fa-tablets nav-icon"></i>
+              <p>Medicamentos</p>
+            </a>
+          </li>
+          <li class="nav-item pl-3">
+              <a routerLink="classrooms" class="nav-link" routerLinkActive="active">
+                <i class="fas fa-chalkboard-teacher nav-icon"></i>
+                <p>Salas de Atendimento</p>
+              </a>
+            </li>
+        </ul>
+      </li>
+      <li class="nav-item has-treeview">
+        <a href="javascript:void(0)" class="nav-link">
+          <i class="nav-icon fas fa-tools"></i>
+          <p>
+            Parametros
+            <i class="fas fa-angle-left right"></i>
+          </p>
+        </a>
+        <ul class="nav nav-treeview">
+          <li class="nav-item pl-3">
+            <a routerLink="user" class="nav-link" routerLinkActive="active">
+              <i class="fas fa-users nav-icon"></i>
+              <p>Usuários</p>
+            </a>
+          </li>
+          <li class="nav-item pl-3">
+            <a routerLink="group" class="nav-link" routerLinkActive="active">
+              <i class="fas fa-users-cog nav-icon"></i>
+              <p>Grupos de Usuário</p>
+            </a>
+          </li>
+          <li class="nav-item pl-3">
+            <a routerLink="routine" class="nav-link " routerLinkActive="active">
+              <i class="fas fa-terminal nav-icon"></i>
+              <p>Rotinas</p>
+            </a>
+          </li>
+        </ul>
+      </li> -->
+      <li class="nav-item mt-5">
+        <a href="javascript:void(0)" class="nav-link" (click)="logout()">
+          <i class="fas fa-sign-out-alt nav-icon"></i>
+          <p>Sair</p>
+        </a>
+      </li>
+    </ul>
+  </nav>
+</aside>
