@@ -1,6 +1,6 @@
 # Frontend Dashboard Layout Default
 
-Projeto de Frontend
+Projeto de Frontend padrão para a criação de novos produtos sem a necessidade de recriar toda a estrutura default.
 
 # Sobre o versionamento
 
