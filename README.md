@@ -1,6 +1,6 @@
 # Frontend Dashboard Layout Default
 
-Projeto de Frontend
+Projeto de Frontend padrão para a criação de novos produtos sem a necessidade de recriar toda a estrutura default.
 
 # Sobre o versionamento
 
@@ -13,10 +13,10 @@ Projeto de Frontend
 
 # Versões
 
-0.0.1       - Instalação Default do Projeto
-0.0.1.1     - Atualização das Dependencias
-0.0.2       - Instalação do Bootstrap 4.3.1
-0.0.3       - Instalação do Ngx Bootstrap 5.0.0 - https://valor-software.com/ngx-bootstrap/#/documentation#getting-started
-0.0.4       - Criação da estrutura de pastas
-0.0.4.1     - Instalação do Jquery e AdminLTE
-0.0.5       - Atualização de Bibliotecas e Atualização Angular Ivy
+- 0.0.1       - Instalação Default do Projeto
+- 0.0.1.1     - Atualização das Dependencias
+- 0.0.2       - Instalação do Bootstrap 4.3.1
+- 0.0.3       - Instalação do Ngx Bootstrap 5.0.0 - https://valor-software.com/ngx-bootstrap/#/documentation#getting-started
+- 0.0.4       - Criação da estrutura de pastas
+- 0.0.4.1     - Instalação do Jquery e AdminLTE
+- 0.0.5       - Atualização de Bibliotecas e Atualização Angular Ivy
