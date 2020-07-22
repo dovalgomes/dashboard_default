@@ -2,6 +2,8 @@ import { Router } from '@angular/router';
 
 import { Component, OnInit } from '@angular/core';
 
+import { AuthProvider } from './../../services/auth/auth.provider';
+
 
 @Component({
   selector: 'app-main-sidebar',
@@ -14,7 +16,7 @@ export class MainSidebarComponent implements OnInit {
 
 
   constructor(
-    private readonly router: Router
+    private readonly authProvider: AuthProvider
   ) { }
 
   ngOnInit() {
@@ -22,7 +24,7 @@ export class MainSidebarComponent implements OnInit {
   }
 
   logout() {
-    this.router.navigate(['login']);
+    this.authProvider.logoff();
   }
 
 

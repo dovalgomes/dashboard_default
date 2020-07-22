@@ -1,5 +1,7 @@
 
+
 import { Component, OnInit } from '@angular/core';
+import { AuthProvider } from './../services/auth/auth.provider';
 
 @Component({
   selector: 'app-root',
@@ -8,20 +10,21 @@ import { Component, OnInit } from '@angular/core';
 
 export class AppComponent implements OnInit {
 
-  public title = '';
-
+  public title: string = '';
   public showMenu: boolean = false;
 
-  constructor(
+  public options = {};
 
+  constructor(
+    private authProvider: AuthProvider
   ) {
 
   }
   ngOnInit(): void {
-    // console.log(document.URL.indexOf('login') !== -1);
-    setTimeout(() => {
-      this.showMenu = document.URL.indexOf('login') === -1;
-      console.log('ok');
-    }, 1000);
+
+    this.authProvider.authenticated.subscribe((authenticated: boolean) => {
+      this.showMenu = authenticated;
+    });
+
   }
 }

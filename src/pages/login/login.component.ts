@@ -1,3 +1,6 @@
+import { Login } from './../../services/auth/models/login.model';
+import { AuthProvider } from './../../services/auth/auth.provider';
+
 
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
@@ -9,16 +12,19 @@ import { Router } from '@angular/router';
 })
 export class LoginComponent implements OnInit {
 
+
+  public login: Login = new Login();
+
   constructor(
-    private readonly router: Router
+    private readonly authProvider: AuthProvider
   ) { }
 
 
-  login() {
-    this.router.navigate(['main']);
+  authenticate() {
+    this.authProvider.authenticate(this.login);
   }
 
   ngOnInit() {
-    // $(document).resize();
+
   }
 }
