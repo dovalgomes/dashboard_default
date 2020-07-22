@@ -10,7 +10,7 @@ export class AppComponent implements OnInit {
 
   public title = '';
 
-  public showMenu: boolean = true;
+  public showMenu: boolean = false;
 
   constructor(
 
@@ -18,6 +18,10 @@ export class AppComponent implements OnInit {
 
   }
   ngOnInit(): void {
-
+    // console.log(document.URL.indexOf('login') !== -1);
+    setTimeout(() => {
+      this.showMenu = document.URL.indexOf('login') === -1;
+      console.log('ok');
+    }, 1000);
   }
 }

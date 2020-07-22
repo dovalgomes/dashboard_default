@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 
 import { Component, OnInit } from '@angular/core';
 
@@ -13,7 +14,7 @@ export class MainSidebarComponent implements OnInit {
 
 
   constructor(
-
+    private readonly router: Router
   ) { }
 
   ngOnInit() {
@@ -21,7 +22,7 @@ export class MainSidebarComponent implements OnInit {
   }
 
   logout() {
-
+    this.router.navigate(['login']);
   }
 
 
