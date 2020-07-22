@@ -3,11 +3,13 @@
 
 
 <div [ngClass]="showMenu? 'content-wrapper': ''">
+  
   <div class="content-header">
     <div class="container-fluid">
 
     </div>
   </div>
+
   <div class="content">
     <div class="container-fluid">
       <router-outlet></router-outlet>
@@ -17,3 +19,5 @@
 </div>
 
 <app-footer *ngIf="showMenu"></app-footer>
+
+<simple-notifications [options]="options"></simple-notifications>
