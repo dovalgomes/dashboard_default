@@ -1,6 +1,7 @@
+import { User } from './../../services/auth/models/user.model';
 import { Router } from '@angular/router';
 
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 
 import { AuthProvider } from './../../services/auth/auth.provider';
 
@@ -12,7 +13,7 @@ import { AuthProvider } from './../../services/auth/auth.provider';
 })
 export class MainSidebarComponent implements OnInit {
 
-  protected user: any = { name: '' };
+  @Input() user: User;
 
 
   constructor(

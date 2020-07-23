@@ -2,7 +2,7 @@ export class Login {
 
     public email: string;
     public password: string;
-    public remember: boolean;
+    public remember?: boolean;
 
     constructor() {
 

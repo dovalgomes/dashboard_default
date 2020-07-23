@@ -20,3 +20,4 @@ Projeto de Frontend padrão para a criação de novos produtos sem a necessidade
 - 0.0.4       - Criação da estrutura de pastas
 - 0.0.4.1     - Instalação do Jquery e AdminLTE
 - 0.0.5       - Atualização de Bibliotecas e Atualização Angular Ivy
+- 0.0.6       - Implementação da Fase de Autenticação

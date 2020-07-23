@@ -1,3 +1,5 @@
+import { AuthGuard } from './../services/auth/auth.guard';
+
 
 //#region Pages
 import { HeaderComponent } from '../layout/header/header.component';
@@ -11,17 +13,12 @@ import { LoginComponent } from './../pages/login/login.component';
 
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { HttpClientModule } from '@angular/common/http';
 // import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 // import { NgxMaskModule } from 'ngx-mask';
-// import { FormsModule, } from '@angular/forms';
 import { FormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { SimpleNotificationsModule } from 'angular2-notifications';
-import { NotificationProvider } from './../services/notification/notification.provider';
-
-
-
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 // import { SharedModule } from './../shared/shared.module';
@@ -30,16 +27,21 @@ import { AppComponent } from './app.component';
 // import { AutoFocusDirective } from './../shared/directives/auto-focus.directive';
 //#endregion
 
+import { NotificationProvider } from './../services/notification/notification.provider';
 import { MailProvider } from './../services/abstract/mail.provider';
 import { AuthProvider } from './../services/auth/auth.provider';
+import { AuthService } from './../services/auth/auth.service';
+import { StorageService } from './../services/storage/storage.service';
+
 
 @NgModule({
   imports: [
     BrowserModule,
+    HttpClientModule,
     FormsModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    SimpleNotificationsModule.forRoot()
+    SimpleNotificationsModule.forRoot(),
   ],
   declarations: [
     AppComponent,
@@ -48,12 +50,15 @@ import { AuthProvider } from './../services/auth/auth.provider';
     FooterComponent,
     MainComponent,
     LoginComponent
-
   ],
   providers: [
+
+    { provide: AuthService, useClass: AuthService },
     { provide: AuthProvider, useClass: AuthProvider },
     { provide: MailProvider, useClass: MailProvider },
-    { provide: NotificationProvider, useClass: NotificationProvider }
+    { provide: NotificationProvider, useClass: NotificationProvider },
+    { provide: StorageService, useClass: StorageService },
+    { provide: AuthGuard, useClass: AuthGuard },
   ],
   bootstrap: [AppComponent]
 })
