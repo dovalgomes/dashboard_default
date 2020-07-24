@@ -8,10 +8,7 @@ import { MainComponent } from '../pages/main/main.component';
 import { LoginComponent } from './../pages/login/login.component';
 import { AdminComponent } from './../pages/admin/admin.component';
 
-
-
 //#endregion
-
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
@@ -24,21 +21,20 @@ import { AvatarModule } from 'ngx-avatar';
 import { NgxLoadingModule } from 'ngx-loading';
 
 
-
 //#region Directives
 // import { AutoFocusDirective } from './../shared/directives/auto-focus.directive';
 //#endregion
 
-import { NotificationProvider } from './../services/notification/notification.provider';
+
 import { MailProvider } from './../services/abstract/mail.provider';
 import { AuthProvider } from './../services/auth/auth.provider';
+import { AppProvider } from './../services/application/app.provider';
+
 import { AuthService } from './../services/auth/auth.service';
 import { StorageService } from './../services/storage/storage.service';
 
 import { AuthGuard } from '../services/guards/auth.guard';
 import { AdminGuard } from './../services/guards/admin.guard';
-
-
 
 
 
@@ -67,7 +63,7 @@ import { AdminGuard } from './../services/guards/admin.guard';
     { provide: AuthService, useClass: AuthService },
     { provide: AuthProvider, useClass: AuthProvider },
     { provide: MailProvider, useClass: MailProvider },
-    { provide: NotificationProvider, useClass: NotificationProvider },
+    { provide: AppProvider, useClass: AppProvider },
     { provide: StorageService, useClass: StorageService },
     { provide: AuthGuard, useClass: AuthGuard },
     { provide: AdminGuard, useClass: AdminGuard }

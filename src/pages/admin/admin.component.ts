@@ -1,5 +1,8 @@
-import { NotificationProvider } from './../../services/notification/notification.provider';
+
 import { Component, OnInit } from '@angular/core';
+
+import { AppProvider } from './../../services/application/app.provider';
+
 
 @Component({
   selector: 'app-admin',
@@ -9,11 +12,11 @@ import { Component, OnInit } from '@angular/core';
 export class AdminComponent implements OnInit {
 
   constructor(
-    private readonly notificationProvider: NotificationProvider
+    private readonly appProvider: AppProvider
   ) {
-    this.notificationProvider.startLoading();
+    this.appProvider.startLoading();
     setTimeout(() => {
-      this.notificationProvider.stopLoading();
+      this.appProvider.stopLoading();
     }, 1500);
   }
 

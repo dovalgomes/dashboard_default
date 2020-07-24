@@ -1,6 +1,6 @@
-import { NotificationProvider } from './../services/notification/notification.provider';
 import { User } from './../services/auth/models/user.model';
 
+import { AppProvider } from './../services/application/app.provider';
 
 import { Component, OnInit } from '@angular/core';
 import { AuthProvider } from './../services/auth/auth.provider';
@@ -12,20 +12,21 @@ import { AuthProvider } from './../services/auth/auth.provider';
 
 export class AppComponent implements OnInit {
 
-  public title: string = '';
-  public showMenu: boolean = false;
-  public user: User = new User();
+  public page: any = { title: '', };
 
-  public showLoading: boolean;
+  public showMenu: boolean = false;
+  public showLoading: boolean = false;
+
+  public user: User = new User();
 
   public options = {};
 
   constructor(
     private authProvider: AuthProvider,
-    private notificationProvider: NotificationProvider
+    private appProvider: AppProvider
   ) {
 
-    this.notificationProvider.loadingEmitter.subscribe((show: boolean) => {
+    this.appProvider.loadingEmitter.subscribe((show: boolean) => {
       this.showLoading = show;
     });
 

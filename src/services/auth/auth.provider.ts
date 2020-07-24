@@ -4,9 +4,12 @@ import { Login } from './models/login.model';
 import { Router } from '@angular/router';
 import { Injectable, EventEmitter } from '@angular/core';
 
-import { NotificationProvider } from '../notification/notification.provider';
+
+
 import { MailProvider } from './../abstract/mail.provider';
 import { User } from './models/user.model';
+
+import { AppProvider } from '../application/app.provider';
 
 
 @Injectable()
@@ -20,7 +23,7 @@ export class AuthProvider {
 
     constructor(
         private readonly mailProvider: MailProvider,
-        private readonly notifyProvider: NotificationProvider,
+        private readonly appProvider: AppProvider,
         private readonly storageService: StorageService,
         private readonly router: Router,
         private readonly authService: AuthService
@@ -35,7 +38,7 @@ export class AuthProvider {
             }
         } catch (err) {
             this.setAuthenticated(false);
-            this.notifyProvider.warn('Atenção', err.message);
+            this.appProvider.showMessage('warn', 'Atenção', err.message);
         }
 
     }
@@ -81,7 +84,7 @@ export class AuthProvider {
             this.removeRemember();
             this.router.navigate(['login']);
         } catch (err) {
-            this.notifyProvider.danger('Ocorreu um erro', err.message);
+            this.appProvider.showMessage('danger', 'Ocorreu um erro', err.message);
         }
     }
 
