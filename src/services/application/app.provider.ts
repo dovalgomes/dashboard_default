@@ -1,6 +1,7 @@
 import { Injectable, EventEmitter } from '@angular/core';
 
 import { NotificationsService } from 'angular2-notifications';
+import { PageHeader } from '../abstract/models/page-header.model';
 
 @Injectable()
 export class AppProvider {
@@ -8,8 +9,7 @@ export class AppProvider {
     private options: any = { showProgressBar: true, pauseOnHover: true, clickToClose: true, timeout: 3500 };
 
     public loadingEmitter: EventEmitter<boolean> = new EventEmitter<boolean>();
-
-
+    public headerPageEmiter: EventEmitter<PageHeader> = new EventEmitter<PageHeader>();
 
     constructor(
         private readonly notification: NotificationsService
@@ -22,6 +22,10 @@ export class AppProvider {
     }
     public stopLoading() {
         this.loadingEmitter.emit(false);
+    }
+
+    public setHeaderPage(header: PageHeader) {
+        this.headerPageEmiter.emit(header);
     }
 
     public showMessage(type: 'success' | 'warn' | 'danger' | 'info', title: string, message: string): void {

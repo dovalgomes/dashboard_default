@@ -1,1 +1,141 @@
-<p>admin works!</p>
+<div class="row">
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12"></div>
+</div>
+
+<div class="row">
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+
+        <div class="card">
+            <div class="card-header d-flex p-0">
+                <h3 class="card-title p-3">{{menuTitle}}</h3>
+                <ul class="nav nav-pills ml-auto p-2">
+                    <div class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="javascript: void(0)"> Gestão de
+                            Acessos <span class="caret"></span></a>
+                        <div class="dropdown-menu">
+                            <li class="nav-item"><a class="nav-link" href="#menu_usuarios"
+                                    (click)="menuTitle = 'Gestão de Usuários'" data-toggle="tab">Usuários</a></li>
+                            <li class="nav-item"><a class="nav-link" href="#menu_permissoes"
+                                    (click)="menuTitle = 'Gestão de Permissões'" data-toggle="tab">Permissões</a></li>
+                        </div>
+                    </div>
+                </ul>
+            </div>
+
+            <div class="card-body">
+                <div class="tab-content">
+                    <div class="tab-pane active" id="menu_usuarios">
+
+                        <div class="row">
+                            <div class="col-md-12">
+                                <button class="btn btn-sm btn-primary">Adicionar</button>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div style="margin-top: 20px" class="col-12 col-sm-6 col-md-4" *ngFor="let user of users">
+                                <div class="card bg-light">
+                                    <div class="card-header text-muted border-bottom-0">
+                                        {{user.person.business.department}}
+                                    </div>
+                                    <div class="card-body pt-0">
+                                        <div class="row">
+                                            <div class="col-9">
+                                                <h2 class="lead" style="cursor: pointer;" (click)="showDetail(user)">
+                                                    <b>{{user.person.getFullName()}}</b></h2>
+                                                <p class="text-muted text-sm">
+                                                    <b>Cargo: </b> {{user.person.business.role}}
+                                                </p>
+                                                <ul class="ml-4 mb-0 fa-ul text-muted">
+                                                    <li class="small">
+                                                        <span class="fa-li">
+                                                            <i class="fas fa-lg fa-phone"></i>
+                                                        </span>
+                                                        Telefone: {{user.person.contact.phone}}
+                                                    </li>
+                                                    <li class="small">
+                                                        <span class="fa-li">
+                                                            <i class="fas fa-lg fa-building"></i>
+                                                        </span>
+                                                        Endereço: {{user.person.address.getAddressFormatted()}}
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                            <div class="col-3 text-center">
+                                                <img src="../../assets//img/user.png" alt=""
+                                                    class="img-circle img-fluid">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="card-footer">
+                                        <!-- <div class="row"> -->
+                                        <!-- <div class="text-left">
+                                         
+                                            </div> -->
+                                        <!-- <button class="btn btn-sm">
+                                                <i class="fas fa-eye"></i>
+                                                Detalhes
+                                            </button> -->
+                                        <div class="text-right">
+                                            <button class="btn btn-sm btn-default">
+                                                <i class="fas fa-user-edit"></i>
+                                                Editar
+                                            </button>
+                                            <button class="btn btn-sm btn-danger">
+                                                <i class="fas fa-ban"></i>
+                                                Desativar
+                                            </button>
+                                            <!-- </div> -->
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- <div class="card bg-light">
+                                    <div class="card-header text-muted border-bottom-0">
+                                        Digital Strategist
+                                    </div>
+                                    <div class="card-body pt-0">
+                                        <div class="row">
+                                            <div class="col-7">
+                                                <h2 class="lead"><b>Nicole Pearson</b></h2>
+                                                <p class="text-muted text-sm"><b>About: </b> Web Designer / UX / Graphic
+                                                    Artist / Coffee Lover </p>
+                                                <ul class="ml-4 mb-0 fa-ul text-muted">
+                                                    <li class="small"><span class="fa-li"><i
+                                                                class="fas fa-lg fa-building"></i></span> Address: Demo
+                                                        Street 123, Demo City 04312, NJ</li>
+                                                    <li class="small"><span class="fa-li"><i
+                                                                class="fas fa-lg fa-phone"></i></span> Phone #: + 800 -
+                                                        12 12 23 52</li>
+                                                </ul>
+                                            </div>
+                                            <div class="col-5 text-center">
+                                                <img src="../../dist/img/user1-128x128.jpg" alt=""
+                                                    class="img-circle img-fluid">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="card-footer">
+                                        <div class="text-right">
+                                            <a href="#" class="btn btn-sm bg-teal">
+                                                <i class="fas fa-comments"></i>
+                                            </a>
+                                            <a href="#" class="btn btn-sm btn-primary">
+                                                <i class="fas fa-user"></i> View Profile
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div> -->
+                        </div>
+                    </div>
+
+                    <div class="tab-pane" id="menu_permissoes">
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+</div>

@@ -33,6 +33,9 @@ import { AppProvider } from './../services/application/app.provider';
 import { AuthService } from './../services/auth/auth.service';
 import { StorageService } from './../services/storage/storage.service';
 
+import { UserProvider } from './../services/users/user.provider';
+import { UserService } from './../services/users/user.service';
+
 import { AuthGuard } from '../services/guards/auth.guard';
 import { AdminGuard } from './../services/guards/admin.guard';
 
@@ -61,6 +64,8 @@ import { AdminGuard } from './../services/guards/admin.guard';
   providers: [
 
     { provide: AuthService, useClass: AuthService },
+    { provide: UserService, useClass: UserService },
+    { provide: UserProvider, useClass: UserProvider },
     { provide: AuthProvider, useClass: AuthProvider },
     { provide: MailProvider, useClass: MailProvider },
     { provide: AppProvider, useClass: AppProvider },

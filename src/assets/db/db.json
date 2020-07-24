@@ -4,9 +4,19 @@
             "id": 1,
             "firstName": "Doval",
             "lastName": "Gomes Guzzo",
+            "phone": "27998780712",
+            "department": "TI",
+            "role": "Analista",
+            "uf": "ES",
+            "city": "Vila Velha",
+            "neighborhood": "Itapuã",
+            "address": "Rua Guanabara",
+            "number": "1587",
+            "zip_code": "29101595",
             "email": "dovalgomes93@gmail.com",
             "password": "1234",
-            "admin": true
+            "admin": true,
+            "active": true
         }
     ]
 }

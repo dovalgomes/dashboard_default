@@ -4,12 +4,16 @@ import { Login } from './models/login.model';
 import { Router } from '@angular/router';
 import { Injectable, EventEmitter } from '@angular/core';
 
+import { UserService } from './../users/user.service';
+
+
 
 
 import { MailProvider } from './../abstract/mail.provider';
-import { User } from './models/user.model';
+import { User } from '../users/models/user.model';
 
 import { AppProvider } from '../application/app.provider';
+import { UserProvider } from '../users/user.provider';
 
 
 @Injectable()
@@ -26,16 +30,31 @@ export class AuthProvider {
         private readonly appProvider: AppProvider,
         private readonly storageService: StorageService,
         private readonly router: Router,
-        private readonly authService: AuthService
+        private readonly userProvider: UserProvider
+        // private readonly authService: AuthService
     ) { }
 
     public async authenticate(credentials: Login) {
         try {
-            if (await this.isValid(credentials)) {
-                this.setRemember(credentials);
-                this.setAuthenticated(true);
-                this.router.navigate(['main']);
+
+            this.validateLogin(credentials);
+            const user: any = <User>await this.userProvider.findUserByEmail(credentials.email);
+
+            if (!user) {
+                throw new Error('Usuário não encontrado!');
             }
+
+            if (user.message) {
+                throw new Error('Falha no serviço - Não foi possivel autenticar o usuário entre em contato com o administrador do sistema');
+            }
+            
+            this.checkCredentials(credentials, user);
+            this.userAuthenticated = user;
+            this.userEmmiter.emit(user);
+            this.setRemember(credentials);
+            this.setAuthenticated(true);
+            this.router.navigate(['main']);
+
         } catch (err) {
             this.setAuthenticated(false);
             this.appProvider.showMessage('warn', 'Atenção', err.message);
@@ -50,32 +69,18 @@ export class AuthProvider {
         }
     }
 
-    public async isValid(credentials: Login) {
-
+    public validateLogin(credentials: Login) {
         this.mailProvider.isValid(credentials.email);
 
         if (!credentials.password) {
             throw new Error('Informe a Senha!');
         }
+    }
 
-        const user: any = <User>await this.findUserByEmail(credentials.email);
-
-        if (!user) {
-            throw new Error('Usuário não encontrado!');
-        }
-
-        if (user.message) {
-            throw new Error('Falha no serviço - Não foi possivel autenticar o usuário entre em contato com o administrador do sistema');
-        }
-
+    public checkCredentials(credentials: Login, user: User) {
         if (credentials.password !== user.login.password) {
             throw new Error('Senha Inválida!');
         }
-
-        this.userAuthenticated = user;
-        this.userEmmiter.emit(user);
-
-        return true;
     }
 
     public logoff() {
@@ -101,21 +106,6 @@ export class AuthProvider {
 
     private removeRemember() {
         this.storageService.delete('remember_login');
-    }
-
-    public findUserByEmail(email: string): Promise<User | boolean | any> {
-        return new Promise(resolve => {
-            this.authService.getByEmail(email).subscribe((user: User) => {
-
-                if (user) {
-                    resolve(user);
-                }
-
-                resolve(false);
-            }, err => {
-                resolve(err);
-            });
-        });
     }
 
 }
