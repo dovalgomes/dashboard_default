@@ -47,7 +47,8 @@ export class AuthService {
         const user: User = new User();
 
         user.id = element.id;
-        user.name = element.name;
+        user.firstName = element.firstName;
+        user.lastName = element.lastName;
         user.login = { email: element.email, password: element.password };
         user.admin = element.admin;
 
