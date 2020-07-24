@@ -12,9 +12,10 @@ import { User } from './models/user.model';
 @Injectable()
 export class AuthProvider {
 
-    public authenticated: EventEmitter<boolean> = new EventEmitter<boolean>();
-    public user: EventEmitter<User> = new EventEmitter<User>();
+    public authEmmiter: EventEmitter<boolean> = new EventEmitter<boolean>();
+    public userEmmiter: EventEmitter<User> = new EventEmitter<User>();
 
+    public userAuthenticated: User = new User();
     public isAuthenticated: boolean = false;
 
     constructor(
@@ -68,7 +69,8 @@ export class AuthProvider {
             throw new Error('Senha Inválida!');
         }
 
-        this.user.emit(user);
+        this.userAuthenticated = user;
+        this.userEmmiter.emit(user);
 
         return true;
     }
@@ -85,7 +87,7 @@ export class AuthProvider {
 
     private setAuthenticated(authenticated: boolean) {
         this.isAuthenticated = authenticated;
-        this.authenticated.emit(authenticated);
+        this.authEmmiter.emit(authenticated);
     }
 
     private setRemember(login: Login) {

@@ -1,9 +1,9 @@
-import { AuthProvider } from './auth.provider';
+import { AuthProvider } from '../auth/auth.provider';
 import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, Router } from '@angular/router';
 import { Injectable } from '@angular/core';
 
 @Injectable()
-export class AuthGuard implements CanActivate {
+export class AdminGuard implements CanActivate {
 
     constructor(
         private readonly authProvider: AuthProvider,
@@ -13,9 +13,13 @@ export class AuthGuard implements CanActivate {
     canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
 
         if (this.authProvider.isAuthenticated) {
-            return true;
+            if (this.authProvider.userAuthenticated.admin) {
+                return true;
+            } else {
+                this.router.navigate(['main']);
+                return true;
+            }
         }
-
         this.router.navigate(['login']);
         return false;
     }

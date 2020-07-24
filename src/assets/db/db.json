@@ -2,7 +2,8 @@
     "users": [
         {
             "id": 1,
-            "name": "Doval Gomes Guzzo",
+            "firstName": "Doval",
+            "lastName": "Gomes Guzzo",
             "email": "dovalgomes93@gmail.com",
             "password": "1234",
             "admin": true

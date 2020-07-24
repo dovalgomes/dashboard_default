@@ -1,3 +1,4 @@
+import { NotificationProvider } from './../services/notification/notification.provider';
 import { User } from './../services/auth/models/user.model';
 
 
@@ -13,30 +14,31 @@ export class AppComponent implements OnInit {
 
   public title: string = '';
   public showMenu: boolean = false;
+  public user: User = new User();
 
-  public user: User;
+  public showLoading: boolean;
 
   public options = {};
 
   constructor(
     private authProvider: AuthProvider,
+    private notificationProvider: NotificationProvider
   ) {
 
-  }
+    this.notificationProvider.loadingEmitter.subscribe((show: boolean) => {
+      this.showLoading = show;
+    });
 
-  ngOnInit(): void {
-
-    this.authProvider.authenticated.subscribe((authenticated: boolean) => {
+    this.authProvider.authEmmiter.subscribe((authenticated: boolean) => {
       this.showMenu = authenticated;
     });
 
-    this.authProvider.user.subscribe((user: User) => {
+    this.authProvider.userEmmiter.subscribe((user: User) => {
       this.user = user;
     });
+  }
 
+  ngOnInit(): void {
     this.authProvider.authenticatWithRemember();
-
-
-
   }
 }
