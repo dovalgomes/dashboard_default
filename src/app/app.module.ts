@@ -1,5 +1,3 @@
-import { AuthGuard } from './../services/auth/auth.guard';
-
 
 //#region Pages
 import { HeaderComponent } from '../layout/header/header.component';
@@ -14,14 +12,13 @@ import { LoginComponent } from './../pages/login/login.component';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
-// import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-// import { NgxMaskModule } from 'ngx-mask';
 import { FormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { SimpleNotificationsModule } from 'angular2-notifications';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-// import { SharedModule } from './../shared/shared.module';
+import { AvatarModule } from 'ngx-avatar';
+
 
 //#region Directives
 // import { AutoFocusDirective } from './../shared/directives/auto-focus.directive';
@@ -32,6 +29,8 @@ import { MailProvider } from './../services/abstract/mail.provider';
 import { AuthProvider } from './../services/auth/auth.provider';
 import { AuthService } from './../services/auth/auth.service';
 import { StorageService } from './../services/storage/storage.service';
+import { AuthGuard } from './../services/auth/auth.guard';
+
 
 
 @NgModule({
@@ -42,6 +41,7 @@ import { StorageService } from './../services/storage/storage.service';
     AppRoutingModule,
     BrowserAnimationsModule,
     SimpleNotificationsModule.forRoot(),
+    AvatarModule.forRoot()
   ],
   declarations: [
     AppComponent,

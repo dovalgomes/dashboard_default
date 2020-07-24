@@ -7,11 +7,10 @@
 
   <div class="sidebar">
     <div class="user-panel mt-3 pb-3 mb-3 d-flex">
-      <div class="image">
-        <img src="./../../assets/img/user.png" class="img-circle elevation-2" alt="{{user.name}}">
-      </div>
-      <div class="info">
-        <a href="javascript: void(0)" class="d-block">{{user.name}}</a>
+      <ngx-avatar class="image-avatar" size="40" value="{{user.getInitials()}}">
+      </ngx-avatar>
+      <div id="user-name" class="info">
+        <a href="javascript: void(0)" class="d-block">{{user.getFullName()}}</a>
       </div>
     </div>
 
@@ -32,7 +31,7 @@
             <p>Sair</p>
           </a>
         </li>
-        
+
         <!-- <li class="nav-item has-treeview menu-open">
           <a href="#" class="nav-link active">
             <i class="nav-icon fas fa-tachometer-alt"></i>
@@ -557,13 +556,13 @@
             <p>Informational</p>
           </a>
         </li> -->
-     
-      <!-- </ul>
+
+        <!-- </ul>
     </nav>
   </div>
 </aside> -->
 
-<!-- 
+        <!-- 
 <aside class="main-sidebar sidebar-dark-primary elevation-4">
   <a class="brand-link">
     <span style="color: white" class="brand-text font-weight-light">Dashboard Default</span>
