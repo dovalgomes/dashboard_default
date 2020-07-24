@@ -6,6 +6,9 @@ import { FooterComponent } from '../layout/footer/footer.component';
 import { MainComponent } from '../pages/main/main.component';
 
 import { LoginComponent } from './../pages/login/login.component';
+import { AdminComponent } from './../pages/admin/admin.component';
+
+
 
 //#endregion
 
@@ -18,6 +21,8 @@ import { SimpleNotificationsModule } from 'angular2-notifications';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { AvatarModule } from 'ngx-avatar';
+import { NgxLoadingModule } from 'ngx-loading';
+
 
 
 //#region Directives
@@ -29,7 +34,11 @@ import { MailProvider } from './../services/abstract/mail.provider';
 import { AuthProvider } from './../services/auth/auth.provider';
 import { AuthService } from './../services/auth/auth.service';
 import { StorageService } from './../services/storage/storage.service';
-import { AuthGuard } from './../services/auth/auth.guard';
+
+import { AuthGuard } from '../services/guards/auth.guard';
+import { AdminGuard } from './../services/guards/admin.guard';
+
+
 
 
 
@@ -41,7 +50,8 @@ import { AuthGuard } from './../services/auth/auth.guard';
     AppRoutingModule,
     BrowserAnimationsModule,
     SimpleNotificationsModule.forRoot(),
-    AvatarModule.forRoot()
+    AvatarModule.forRoot(),
+    NgxLoadingModule.forRoot({})
   ],
   declarations: [
     AppComponent,
@@ -49,7 +59,8 @@ import { AuthGuard } from './../services/auth/auth.guard';
     MainSidebarComponent,
     FooterComponent,
     MainComponent,
-    LoginComponent
+    LoginComponent,
+    AdminComponent
   ],
   providers: [
 
@@ -59,6 +70,7 @@ import { AuthGuard } from './../services/auth/auth.guard';
     { provide: NotificationProvider, useClass: NotificationProvider },
     { provide: StorageService, useClass: StorageService },
     { provide: AuthGuard, useClass: AuthGuard },
+    { provide: AdminGuard, useClass: AdminGuard }
   ],
   bootstrap: [AppComponent]
 })

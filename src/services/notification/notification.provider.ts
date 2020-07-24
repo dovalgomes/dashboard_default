@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, EventEmitter } from '@angular/core';
 
 import { NotificationsService } from 'angular2-notifications';
 
@@ -6,10 +6,22 @@ import { NotificationsService } from 'angular2-notifications';
 export class NotificationProvider {
 
     private options: any = { showProgressBar: true, pauseOnHover: true, clickToClose: true, timeout: 3500 };
+
+    public loadingEmitter: EventEmitter<boolean> = new EventEmitter<boolean>();
+
+
+
     constructor(
         private readonly notification: NotificationsService
     ) {
 
+    }
+
+    public startLoading() {
+        this.loadingEmitter.emit(true);
+    }
+    public stopLoading() {
+        this.loadingEmitter.emit(false);
     }
 
     public success(title: string, message: string) {
