@@ -12,7 +12,7 @@ import { AdminComponent } from './../pages/admin/admin.component';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { SimpleNotificationsModule } from 'angular2-notifications';
 import { AppRoutingModule } from './app-routing.module';
@@ -39,6 +39,10 @@ import { UserService } from './../services/users/user.service';
 import { AuthGuard } from '../services/guards/auth.guard';
 import { AdminGuard } from './../services/guards/admin.guard';
 
+import * as $ from 'jquery';
+import * as bootstrap from 'bootstrap';
+
+
 
 
 @NgModule({
@@ -46,6 +50,7 @@ import { AdminGuard } from './../services/guards/admin.guard';
     BrowserModule,
     HttpClientModule,
     FormsModule,
+    ReactiveFormsModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     SimpleNotificationsModule.forRoot(),

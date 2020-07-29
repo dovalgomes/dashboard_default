@@ -16,7 +16,7 @@
       "email": "dovalgomes93@gmail.com",
       "password": "1234",
       "admin": true,
-      "active": true
+      "active": false
     },
     {
       "id": 2,
@@ -50,7 +50,6 @@
       "number": "1587",
       "zip_code": "29101595",
       "email": "dovalgomes93@gmail.com",
-      "password": "1234",
       "admin": true,
       "active": true
     },

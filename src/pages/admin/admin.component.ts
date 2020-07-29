@@ -6,6 +6,9 @@ import { PageHeader } from '../../services/abstract/application/page-header.mode
 import { Component, OnInit } from '@angular/core';
 
 import { AppProvider } from './../../services/application/app.provider';
+import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
+
+
 
 
 @Component({
@@ -20,9 +23,15 @@ export class AdminComponent implements OnInit {
 
   public userDataPage: DataPaginate = new DataPaginate();
 
+  private user: User = new User();
+
+  public userForm: FormGroup;
+  public userFormSubmitted: boolean = false;
+
   constructor(
     private readonly appProvider: AppProvider,
-    private readonly userProvider: UserProvider
+    private readonly userProvider: UserProvider,
+    // private readonly formBuilder: FormBuilder
   ) {
 
   }
@@ -33,9 +42,13 @@ export class AdminComponent implements OnInit {
 
   async ngOnInit() {
 
+    this.userForm = this.userProvider.getFormUserRules(this.user);
+
+
+
     setTimeout(() => {
       this.appProvider.setHeaderPage(this.header);
-      this.appProvider.startLoading();
+      // this.appProvider.startLoading();
     }, 1);
 
     this.userDataPage = await this.userProvider.listWithPaginate();
@@ -44,7 +57,7 @@ export class AdminComponent implements OnInit {
   }
 
   async refresh() {
-    this.appProvider.startLoading();
+    // this.appProvider.startLoading();
     this.userDataPage = await this.userProvider.listWithPaginate();
     this.appProvider.stopLoading();
   }
@@ -64,7 +77,31 @@ export class AdminComponent implements OnInit {
   }
 
   addUser() {
+    this.user = new User();
+    this.userForm = this.userProvider.getFormUserRules(this.user);
     $('#modal-user').modal('show');
+  }
+
+  editUser(user: User) {
+    this.user = user;
+    this.userForm = this.userProvider.getFormUserRules(this.user);
+    $('#modal-user').modal('show');
+  }
+
+  saveUser() {
+    this.userFormSubmitted = true;
+
+    this.userProvider.getUserFormValues(this.userForm);
+
+    if (this.userForm.invalid) {
+      return;
+    }
+
+    alert('OK');
+  }
+
+  get userControls() {
+    return this.userForm.controls;
   }
 
 }

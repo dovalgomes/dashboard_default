@@ -13,6 +13,8 @@ export class Person {
 
 
     constructor() {
+        this.firstName = '';
+        this.lastName = '';
         this.contact = new Contact();
         this.address = new Address();
         this.business = new Business();

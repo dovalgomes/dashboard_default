@@ -133,6 +133,7 @@ export class UserService {
             number: user.person.address.number,
             zip_code: user.person.address.zipCode,
             email: user.login.email,
+            password: user.login.password,
             admin: user.login.admin,
             active: user.active
         };

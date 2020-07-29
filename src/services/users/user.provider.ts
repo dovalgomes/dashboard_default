@@ -5,6 +5,12 @@ import { Injectable } from '@angular/core';
 
 import { DataPaginate } from '../abstract/application/data.paginate.model';
 import { AppProvider } from '../application/app.provider';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { Person } from '../abstract/models/person.model';
+import { Login } from '../auth/models/login.model';
+import { Contact } from '../abstract/models/contact.model';
+import { Address } from '../abstract/models/address.model';
+import { Business } from '../abstract/models/business.model';
 
 @Injectable()
 export class UserProvider {
@@ -12,6 +18,7 @@ export class UserProvider {
     constructor(
         private readonly userService: UserService,
         private readonly appProvider: AppProvider,
+        private readonly formBuilder: FormBuilder
     ) {
 
     }
@@ -67,6 +74,7 @@ export class UserProvider {
             this.appProvider.showMessage('danger', 'Erro ao realizar operação', err.message);
         });
     }
+
     public enable(_user: User): void {
         _user.active = true;
         this.userService.put(_user.id, _user).subscribe((user: User) => {
@@ -76,6 +84,53 @@ export class UserProvider {
         }, err => {
             this.appProvider.showMessage('danger', 'Erro ao realizar operação', err.message);
         });
+    }
+
+    public getFormUserRules(user: User) {
+        return this.formBuilder.group({
+            id: [user.id],
+            firstName: [user.person.firstName, Validators.required],
+            lastName: [user.person.lastName, Validators.required],
+            phone: [user.person.contact.phone, Validators.required],
+            department: [user.person.business.department, Validators.required],
+            role: [user.person.business.role, Validators.required],
+            uf: [user.person.address.uf, Validators.required],
+            city: [user.person.address.city, Validators.required],
+            neighborhood: [user.person.address.neighborhood, Validators.required],
+            address: [user.person.address.address, Validators.required],
+            number: [user.person.address.number],
+            zip_code: [user.person.address.zipCode, Validators.required],
+            email: [user.login.email, Validators.required],
+            password: [user.login.password, Validators.required],
+            admin: [user.login.admin],
+            active: [user.active],
+        });
+    }
+
+    public getUserFormValues(form: FormGroup): User {
+        const user = new User();
+
+        const person = new Person();
+        const login = new Login();
+        const contact = new Contact();
+        const address = new Address();
+        const business = new Business();
+
+        const element = form.value;
+
+        address.create(element.uf, element.city, element.neighborhood, element.address, element.number, element.zip_code);
+        contact.create(element.phone);
+        business.create(element.role, element.department);
+        person.create(element.firstName, element.lastName, contact, address, business);
+        login.create(element.email, element.password, element.admin);
+
+        user.id = element.id;
+        user.active = element.active;
+        user.person = person;
+        user.login = login;
+
+        console.log(user);
+        return user;
     }
 
 }
