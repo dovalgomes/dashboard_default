@@ -1,4 +1,4 @@
-import { PageHeader } from './../services/abstract/models/page-header.model';
+import { PageHeader } from '../services/abstract/application/page-header.model';
 import { User } from '../services/users/models/user.model';
 
 import { AppProvider } from './../services/application/app.provider';

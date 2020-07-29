@@ -14,7 +14,7 @@
                             Acessos <span class="caret"></span></a>
                         <div class="dropdown-menu">
                             <li class="nav-item"><a class="nav-link" href="#menu_usuarios"
-                                    (click)="menuTitle = 'Gestão de Usuários'" data-toggle="tab">Usuários</a></li>
+                                    (click)="menuTitle= 'Gestão de Usuários'" data-toggle="tab">Usuários</a></li>
                             <li class="nav-item"><a class="nav-link" href="#menu_permissoes"
                                     (click)="menuTitle = 'Gestão de Permissões'" data-toggle="tab">Permissões</a></li>
                         </div>
@@ -28,12 +28,18 @@
 
                         <div class="row">
                             <div class="col-md-12">
-                                <button class="btn btn-sm btn-primary">Adicionar</button>
+                                <button class="btn btn-sm btn-primary" (click)="addUser()">
+                                    <i class="fas fa-user-plus"></i>
+                                    Adicionar</button>
+                                <button class="btn btn-sm btn-secondary" (click)="refresh()">
+                                    <i class="fas fa-sync"></i>
+                                    Recarregar</button>
                             </div>
                         </div>
 
                         <div class="row">
-                            <div style="margin-top: 20px" class="col-12 col-sm-6 col-md-4" *ngFor="let user of users">
+                            <div style="margin-top: 20px" class="col-12 col-sm-6 col-md-4"
+                                *ngFor="let user of userDataPage.getDataWithLimit()">
                                 <div class="card bg-light">
                                     <div class="card-header text-muted border-bottom-0">
                                         {{user.person.business.department}}
@@ -68,74 +74,205 @@
                                         </div>
                                     </div>
                                     <div class="card-footer">
-                                        <!-- <div class="row"> -->
-                                        <!-- <div class="text-left">
-                                         
-                                            </div> -->
-                                        <!-- <button class="btn btn-sm">
-                                                <i class="fas fa-eye"></i>
-                                                Detalhes
-                                            </button> -->
                                         <div class="text-right">
                                             <button class="btn btn-sm btn-default">
                                                 <i class="fas fa-user-edit"></i>
                                                 Editar
                                             </button>
-                                            <button class="btn btn-sm btn-danger">
-                                                <i class="fas fa-ban"></i>
-                                                Desativar
+                                            <button *ngIf="user.active" class="btn btn-sm btn-danger"
+                                                (click)="disableUser(user)">
+                                                <i class="fas fa-users-slash"></i>
+                                                Bloquear
                                             </button>
-                                            <!-- </div> -->
-                                        </div>
+                                            <button *ngIf="!user.active" class="btn btn-sm btn-success"
+                                                (click)="enableUser(user)">
+                                                <i class="fas fa-user"></i>
+                                                Ativar
+                                            </button> </div>
                                     </div>
                                 </div>
                             </div>
                             <!-- <div class="card bg-light">
-                                    <div class="card-header text-muted border-bottom-0">
-                                        Digital Strategist
-                                    </div>
-                                    <div class="card-body pt-0">
-                                        <div class="row">
-                                            <div class="col-7">
-                                                <h2 class="lead"><b>Nicole Pearson</b></h2>
-                                                <p class="text-muted text-sm"><b>About: </b> Web Designer / UX / Graphic
-                                                    Artist / Coffee Lover </p>
-                                                <ul class="ml-4 mb-0 fa-ul text-muted">
-                                                    <li class="small"><span class="fa-li"><i
-                                                                class="fas fa-lg fa-building"></i></span> Address: Demo
-                                                        Street 123, Demo City 04312, NJ</li>
-                                                    <li class="small"><span class="fa-li"><i
-                                                                class="fas fa-lg fa-phone"></i></span> Phone #: + 800 -
-                                                        12 12 23 52</li>
-                                                </ul>
-                                            </div>
-                                            <div class="col-5 text-center">
-                                                <img src="../../dist/img/user1-128x128.jpg" alt=""
-                                                    class="img-circle img-fluid">
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="card-footer">
-                                        <div class="text-right">
-                                            <a href="#" class="btn btn-sm bg-teal">
-                                                <i class="fas fa-comments"></i>
-                                            </a>
-                                            <a href="#" class="btn btn-sm btn-primary">
-                                                <i class="fas fa-user"></i> View Profile
-                                            </a>
-                                        </div>
-                                    </div>
-                                </div> -->
+                  <div class="card-header text-muted border-bottom-0">
+                    Digital Strategist
+                  </div>
+                  <div class="card-body pt-0">
+                    <div class="row">
+                      <div class="col-7">
+                        <h2 class="lead"><b>Nicole Pearson</b></h2>
+                        <p class="text-muted text-sm"><b>About: </b> Web Designer / UX / Graphic
+                          Artist / Coffee Lover </p>
+                        <ul class="ml-4 mb-0 fa-ul text-muted">
+                          <li class="small"><span class="fa-li"><i
+                                class="fas fa-lg fa-building"></i></span> Address: Demo
+                            Street 123, Demo City 04312, NJ</li>
+                          <li class="small"><span class="fa-li"><i
+                                class="fas fa-lg fa-phone"></i></span> Phone #: + 800 -
+                            12 12 23 52</li>
+                        </ul>
+                      </div>
+                      <div class="col-5 text-center">
+                        <img src="../../dist/img/user1-128x128.jpg" alt=""
+                          class="img-circle img-fluid">
+                      </div>
+                    </div>
+                  </div>
+                  <div class="card-footer">
+                    <div class="text-right">
+                      <a href="#" class="btn btn-sm bg-teal">
+                        <i class="fas fa-comments"></i>
+                      </a>
+                      <a href="#" class="btn btn-sm btn-primary">
+                        <i class="fas fa-user"></i> View Profile
+                      </a>
+                    </div>
+                  </div>
+                </div> -->
                         </div>
-                    </div>
 
-                    <div class="tab-pane" id="menu_permissoes">
+                        <!-- <div class="row"> -->
 
+                        <!-- </div> -->
                     </div>
+                    <!-- 
+          <div class="tab-pane" id="menu_permissoes">
+
+          </div> -->
                 </div>
+            </div>
+            <div class="card-footer clearfix">
+                <ul class="pagination pagination-sm m-0 float-right">
+                    <li *ngIf="userDataPage.hasPrevious()" (click)="userDataPage.previousPage()" class="page-item"><a
+                            class="page-link" href="javascript: void(0)">«</a></li>
+                    <li *ngFor="let page of userDataPage.getIndexPages()" (click)="userDataPage.setPage(page)"
+                        [ngClass]="page === userDataPage.getCurrentPage() ? 'page-item active' : 'page-item'"><a
+                            class="page-link" href="javascript: void(0)">{{page}}</a></li>
+                    <li *ngIf="userDataPage.hasNext()" class="page-item" (click)="userDataPage.nextPage()"><a
+                            class="page-link" href="javascript: void(0)">»</a></li>
+                </ul>
             </div>
 
         </div>
 
+    </div>
+
+    <div class="modal fade" id="modal-user" aria-hidden="true" style="display: none;">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">{{'Adicionar Usuário'}}</h5>
+
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-12">
+                            <ul class="nav nav-tabs">
+                                <li class="nav-item"><a class="nav-link active" href="#tab_1" data-toggle="tab">
+                                        Pessoais</a></li>
+                                <li class="nav-item"><a class="nav-link" href="#tab_2" data-toggle="tab">Localização
+                                    </a>
+                                </li>
+                                <li class="nav-item"><a class="nav-link" href="#tab_3" data-toggle="tab">Acesso</a></li>
+                            </ul>
+                        </div>
+
+                        <div class="col-12">
+                            <div class="tab-content">
+                                <div class="tab-pane active" id="tab_1">
+                                    <div class="row">
+                                        <div class="col-md-6 form-group">
+                                            <label for="">Nome</label>
+                                            <input type="text" class="form-control">
+                                        </div>
+                                        <div class="col-md-6 form-group">
+                                            <label for="">Sobrenome</label>
+                                            <input type="text" class="form-control">
+                                        </div>
+                                        <div class="col-md-3 form-group">
+                                            <label for="">Telefone</label>
+                                            <input type="text" class="form-control">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="tab-pane" id="tab_2">
+                                    <div class="row">
+                                        <div class="col-md-3 form-group">
+                                            <label for="">CEP</label>
+                                            <input type="text" class="form-control">
+                                        </div>
+                                        <div class="col-md-4 form-group">
+                                            <label for="">Estado (UF)</label>
+                                            <input type="text" class="form-control">
+                                        </div>
+
+                                        <div class="col-md-5 form-group">
+                                            <label for="">Cidade</label>
+                                            <input type="text" class="form-control">
+                                        </div>
+                                        <div class="col-md-4 form-group">
+                                            <label for="">Bairro</label>
+                                            <input type="text" class="form-control">
+                                        </div>
+                                        <div class="col-md-8 form-group">
+                                            <label for="">Rua/Av</label> <input type="text" class="form-control">
+                                        </div>
+                                        <div class="col-md-3 form-group">
+                                            <label for="">Número</label> <input type="text" class="form-control">
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- /.tab-pane -->
+                                <div class="tab-pane" id="tab_3">
+                                    <div class="row">
+                                        <div class="col-md-6 form-group">
+                                            <label for="">Departamento</label>
+                                            <input type="text" class="form-control">
+                                        </div>
+                                        <div class="col-md-6 form-group">
+                                            <label for="">Cargo</label>
+                                            <input type="text" class="form-control">
+                                        </div>
+
+                                        <div class="col-md-8 form-group">
+                                            <label for="">E-mail</label>
+                                            <input type="text" class="form-control">
+                                        </div>
+                                        <div class="col-md-4 form-group">
+                                            <label for="">Senha</label>
+                                            <input type="text" class="form-control">
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="icheck-primary">
+                                                <input type="checkbox" id="remember">
+                                                <label for="remember">
+                                                    Administrador
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="modal-footer">
+                    <div class="pull-right">
+                        <button type="button" class="btn btn-sm btn-default" data-dismiss="modal">
+                            <i class="fas fa-angle-left"></i>
+                            Cancelar</button>
+                        <button type="button" class="btn btn-sm btn-primary">
+                            <i class="fas fa-save"></i>
+                            Salvar</button>
+                    </div>
+
+                </div>
+            </div>
+            <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
     </div>
 </div>

@@ -1,6 +1,7 @@
+import { DataPaginate } from './../../services/abstract/application/data.paginate.model';
 import { UserProvider } from './../../services/users/user.provider';
 import { User } from '../../services/users/models/user.model';
-import { PageHeader } from './../../services/abstract/models/page-header.model';
+import { PageHeader } from '../../services/abstract/application/page-header.model';
 
 import { Component, OnInit } from '@angular/core';
 
@@ -17,7 +18,7 @@ export class AdminComponent implements OnInit {
   private header: PageHeader = { title: 'Configurações' };
   public menuTitle: string = 'Gestão de Usuários';
 
-  public users: User[] = [];
+  public userDataPage: DataPaginate = new DataPaginate();
 
   constructor(
     private readonly appProvider: AppProvider,
@@ -36,14 +37,34 @@ export class AdminComponent implements OnInit {
       this.appProvider.setHeaderPage(this.header);
       this.appProvider.startLoading();
     }, 1);
-    this.users = await this.userProvider.list();
 
+    this.userDataPage = await this.userProvider.listWithPaginate();
     this.appProvider.stopLoading();
 
   }
 
+  async refresh() {
+    this.appProvider.startLoading();
+    this.userDataPage = await this.userProvider.listWithPaginate();
+    this.appProvider.stopLoading();
+  }
+
   showDetail(user: User) {
     alert(user.toString());
+  }
+
+  disableUser(user: User) {
+    this.userProvider.disable(user);
+    this.refresh();
+  }
+
+  enableUser(user: User) {
+    this.userProvider.enable(user);
+    this.refresh();
+  }
+
+  addUser() {
+    $('#modal-user').modal('show');
   }
 
 }

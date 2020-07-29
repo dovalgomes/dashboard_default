@@ -47,7 +47,11 @@ export class AuthProvider {
             if (user.message) {
                 throw new Error('Falha no serviço - Não foi possivel autenticar o usuário entre em contato com o administrador do sistema');
             }
-            
+
+            if (!user.active) {
+                throw new Error('Usuário inativo no Sistema, entre em contato com o administrador');
+            }
+
             this.checkCredentials(credentials, user);
             this.userAuthenticated = user;
             this.userEmmiter.emit(user);

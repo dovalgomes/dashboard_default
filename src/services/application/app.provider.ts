@@ -1,7 +1,7 @@
 import { Injectable, EventEmitter } from '@angular/core';
 
 import { NotificationsService } from 'angular2-notifications';
-import { PageHeader } from '../abstract/models/page-header.model';
+import { PageHeader } from '../abstract/application/page-header.model';
 
 @Injectable()
 export class AppProvider {

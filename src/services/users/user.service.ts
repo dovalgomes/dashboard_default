@@ -73,6 +73,26 @@ export class UserService {
         );
     }
 
+    public put(id: number, user: User) {
+
+        const method: string = 'users';
+        const url = this.service + '/' + method + '/' + id;
+
+        let headers: HttpHeaders = new HttpHeaders();
+        headers = headers.set('ContentType', 'application/json');
+        headers = headers.set('Access-Control-Allow-Origin', '*');
+        headers = headers.set('charset', 'UTF-8');
+        headers = headers.set('X-Proxy-URL', url);
+
+        return this.http.put(url, this.sendUser(user), { headers, observe: 'response', responseType: 'json' }).pipe(
+            map((res: any) => {
+                const body = res.body;
+                return this.fillUser(body);
+            })
+        );
+
+    }
+
     private fillUser(element: any): User {
         const user: User = new User();
 
@@ -81,8 +101,6 @@ export class UserService {
         const contact = new Contact();
         const address = new Address();
         const business = new Business();
-
-        console.log(element);
 
         address.create(element.uf, element.city, element.neighborhood, element.address, element.number, element.zip_code);
         contact.create(element.phone);
@@ -97,5 +115,28 @@ export class UserService {
 
 
         return user;
+    }
+
+    private sendUser(user: User) {
+
+        const send = {
+            id: user.id,
+            firstName: user.person.firstName,
+            lastName: user.person.lastName,
+            phone: user.person.contact.phone,
+            department: user.person.business.department,
+            role: user.person.business.role,
+            uf: user.person.address.uf,
+            city: user.person.address.city,
+            neighborhood: user.person.address.neighborhood,
+            address: user.person.address.address,
+            number: user.person.address.number,
+            zip_code: user.person.address.zipCode,
+            email: user.login.email,
+            admin: user.login.admin,
+            active: user.active
+        };
+
+        return send;
     }
 }

@@ -9,9 +9,4 @@ export class Contact {
     public create(phone: string) {
         this.phone = phone;
     }
-
 }
-
-/**
- * Deus... se for da sua vontade que aconteça!
- */

@@ -24,8 +24,9 @@ export class StorageService {
         }
     }
 
-    update() {
-
+    update(key: string, value: any) {
+        this.delete(key);
+        this.insert(key, value);
     }
 
 }

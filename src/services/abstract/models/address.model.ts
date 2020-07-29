@@ -1,12 +1,12 @@
 export class Address {
-
+    
+    public zipCode: string;
     public uf: string;
     public city: string;
 
     public neighborhood: string;
     public address: string;
     public number: string;
-    public zipCode: string;
 
     constructor() {
         this.uf = '';
