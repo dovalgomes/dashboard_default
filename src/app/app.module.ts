@@ -1,3 +1,6 @@
+import { CepService } from './../services/physical-address/cep.service';
+import { PhysicalAddressProvider } from './../services/physical-address/physical-address.provider';
+
 
 //#region Pages
 import { HeaderComponent } from '../layout/header/header.component';
@@ -11,7 +14,7 @@ import { AdminComponent } from './../pages/admin/admin.component';
 //#endregion
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HttpClientJsonpModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { SimpleNotificationsModule } from 'angular2-notifications';
@@ -19,7 +22,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { AvatarModule } from 'ngx-avatar';
 import { NgxLoadingModule } from 'ngx-loading';
-
+import { NgxMaskModule } from 'ngx-mask';
 
 //#region Directives
 // import { AutoFocusDirective } from './../shared/directives/auto-focus.directive';
@@ -41,21 +44,22 @@ import { AdminGuard } from './../services/guards/admin.guard';
 
 import * as $ from 'jquery';
 import * as bootstrap from 'bootstrap';
-
-
+import { InputValidateComponent } from '../components/input-validate/input-validate.component';
 
 
 @NgModule({
   imports: [
     BrowserModule,
     HttpClientModule,
+    HttpClientJsonpModule,
     FormsModule,
     ReactiveFormsModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     SimpleNotificationsModule.forRoot(),
     AvatarModule.forRoot(),
-    NgxLoadingModule.forRoot({})
+    NgxLoadingModule.forRoot({}),
+    NgxMaskModule.forRoot(),
   ],
   declarations: [
     AppComponent,
@@ -64,7 +68,9 @@ import * as bootstrap from 'bootstrap';
     FooterComponent,
     MainComponent,
     LoginComponent,
-    AdminComponent
+    AdminComponent,
+
+    InputValidateComponent
   ],
   providers: [
 
@@ -76,7 +82,9 @@ import * as bootstrap from 'bootstrap';
     { provide: AppProvider, useClass: AppProvider },
     { provide: StorageService, useClass: StorageService },
     { provide: AuthGuard, useClass: AuthGuard },
-    { provide: AdminGuard, useClass: AdminGuard }
+    { provide: AdminGuard, useClass: AdminGuard },
+    { provide: CepService, useClass: CepService },
+    { provide: PhysicalAddressProvider, useClass: PhysicalAddressProvider },
   ],
   bootstrap: [AppComponent]
 })

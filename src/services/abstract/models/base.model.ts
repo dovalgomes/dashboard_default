@@ -7,7 +7,7 @@ export abstract class BaseModel extends Object {
         super();
 
         this.id = 0;
-        this.active = false;
+        this.active = true;
     }
 
     public toString() {

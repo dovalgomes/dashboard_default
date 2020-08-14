@@ -1,3 +1,5 @@
+import { Address } from './../../services/abstract/models/address.model';
+import { PhysicalAddressProvider } from './../../services/physical-address/physical-address.provider';
 import { DataPaginate } from './../../services/abstract/application/data.paginate.model';
 import { UserProvider } from './../../services/users/user.provider';
 import { User } from '../../services/users/models/user.model';
@@ -28,9 +30,23 @@ export class AdminComponent implements OnInit {
   public userForm: FormGroup;
   public userFormSubmitted: boolean = false;
 
+  public validateMessages: any = [
+    { id: 'firstName', type: 'required', message: 'Preencha o Nome' },
+    { id: 'lastName', type: 'required', message: 'Preencha o Sobrenome' },
+    { id: 'phone', type: 'required', message: 'Preencha o Telefone' },
+    { id: 'zip_code', type: 'required', message: 'Preencha o CEP' },
+    { id: 'uf', type: 'required', message: 'Preencha o Estado (UF)' },
+    { id: 'city', type: 'required', message: 'Preencha a Cidade' },
+    { id: 'neighborhood', type: 'required', message: 'Preencha o Bairro' },
+    { id: 'address', type: 'required', message: 'Preencha o Endereço' },
+    { id: 'email', type: 'required', message: 'Preencha o E-mail' },
+    { id: 'password', type: 'required', message: 'Preencha a Senha' },
+  ];
+
   constructor(
     private readonly appProvider: AppProvider,
     private readonly userProvider: UserProvider,
+    private readonly physicalAddressProvider: PhysicalAddressProvider
     // private readonly formBuilder: FormBuilder
   ) {
 
@@ -45,7 +61,6 @@ export class AdminComponent implements OnInit {
     this.userForm = this.userProvider.getFormUserRules(this.user);
 
 
-
     setTimeout(() => {
       this.appProvider.setHeaderPage(this.header);
       // this.appProvider.startLoading();
@@ -54,6 +69,22 @@ export class AdminComponent implements OnInit {
     this.userDataPage = await this.userProvider.listWithPaginate();
     this.appProvider.stopLoading();
 
+  }
+
+  private bindAddressValues(address: Address) {
+    if (address) {
+      this.userForm.controls.zip_code.setValue(address.zipCode);
+      this.userForm.controls.uf.setValue(address.uf);
+      this.userForm.controls.address.setValue(address.address);
+      this.userForm.controls.city.setValue(address.city);
+      this.userForm.controls.neighborhood.setValue(address.neighborhood);
+    }
+  }
+
+  async onBlurCEP(event: any) {
+    const postalCode = event.target.value;
+    const _address: any = await this.physicalAddressProvider.getAddressByPostalCode(postalCode);
+    this.bindAddressValues(_address);
   }
 
   async refresh() {
@@ -90,7 +121,6 @@ export class AdminComponent implements OnInit {
 
   saveUser() {
     this.userFormSubmitted = true;
-
     this.userProvider.getUserFormValues(this.userForm);
 
     if (this.userForm.invalid) {

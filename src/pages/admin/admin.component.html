@@ -161,97 +161,68 @@
                                         </div>
                                         <div class="row">
                                             <div class="col-md-6 form-group">
-                                                <label for="fistName">Nome</label>
-                                                <input id="fistName" name="firstName" formControlName="firstName"
-                                                    type="text" class="form-control"
-                                                    [ngClass]="{ 'is-invalid': userFormSubmitted && userControls.firstName.errors }">
-                                                <div *ngIf="userFormSubmitted && userControls.firstName.errors"
-                                                    class="invalid-feedback">
-                                                    <div *ngIf="userControls.firstName.errors.required">Preencha o Nome
-                                                    </div>
-                                                </div>
+                                                <input-validate [label]="'Nome'" [controlId]="'firstName'"
+                                                    [typeControl]="'text'" [isSubmitted]="userFormSubmitted"
+                                                    [messageError]="validateMessages" [form]="userForm"
+                                                    [controlInsance]="userControls.firstName">
+                                                </input-validate>
                                             </div>
                                             <div class="col-md-6 form-group">
-                                                <label for="lastName">Sobrenome</label>
-                                                <input id="lastName" name="lastName" formControlName="lastName"
-                                                    type="text" class="form-control"
-                                                    [ngClass]="{ 'is-invalid': userFormSubmitted && userControls.lastName.errors }">
-                                                <div *ngIf="userFormSubmitted && userControls.firstName.errors"
-                                                    class="invalid-feedback">
-                                                    <div *ngIf="userControls.lastName.errors.required">Preencha o
-                                                        Sobrenome</div>
-                                                </div>
+                                                <input-validate [label]="'Sobrenome'" [controlId]="'lastName'"
+                                                    [typeControl]="'text'" [isSubmitted]="userFormSubmitted"
+                                                    [messageError]="validateMessages" [form]="userForm"
+                                                    [controlInsance]="userControls.lastName">
+                                                </input-validate>
                                             </div>
                                             <div class="col-md-3 form-group">
-                                                <label for="phone">Telefone</label>
-                                                <input id="phone" name="phone" formControlName="phone" type="text"
-                                                    class="form-control"
-                                                    [ngClass]="{ 'is-invalid': userFormSubmitted && userControls.phone.errors }">
-                                                <div *ngIf="userFormSubmitted && userControls.phone.errors"
-                                                    class="invalid-feedback">
-                                                    <div *ngIf="userControls.phone.errors.required">Preencha o Telefone
-                                                    </div>
-                                                </div>
+                                                <input-validate [label]="'Telefone'" [controlId]="'phone'"
+                                                    [typeControl]="'phone'" [isSubmitted]="userFormSubmitted"
+                                                    [messageError]="validateMessages" [form]="userForm"
+                                                    [mask]="'(00) 0000-00000'" [controlInsance]="userControls.phone">
+                                                </input-validate>
                                             </div>
                                         </div>
                                     </div>
                                     <div class="tab-pane" id="tab_2">
                                         <div class="row">
                                             <div class="col-md-3 form-group">
-                                                <label for="zip_code">CEP</label>
-                                                <input id="zip_code" name="zip_code" formControlName="zip_code"
-                                                    type="text" class="form-control"
-                                                    [ngClass]="{ 'is-invalid': userFormSubmitted && userControls.zip_code.errors }">
-                                                <div *ngIf="userFormSubmitted && userControls.zip_code.errors"
-                                                    class="invalid-feedback">
-                                                    <div *ngIf="userControls.zip_code.errors.required">Preencha o CEP
-                                                    </div>
-                                                </div>
+                                                <input-validate [label]="'CEP'" [controlId]="'zip_code'"
+                                                    [typeControl]="'text'" [isSubmitted]="userFormSubmitted"
+                                                    [messageError]="validateMessages" [form]="userForm" (onBlur)="onBlurCEP($event)"
+                                                    [mask]="'00000-000'" [controlInsance]="userControls.zip_code">
+                                                </input-validate>
                                             </div>
                                             <div class="col-md-4 form-group">
-                                                <label for="uf">Estado (UF)</label>
-                                                <input id="uf" name="zip_code" formControlName="uf" type="text"
-                                                    class="form-control"
-                                                    [ngClass]="{ 'is-invalid': userFormSubmitted && userControls.uf.errors }">
-                                                <div *ngIf="userFormSubmitted && userControls.uf.errors"
-                                                    class="invalid-feedback">
-                                                    <div *ngIf="userControls.uf.errors.required">Preencha o Estado</div>
-                                                </div>
+                                                <input-validate [label]="'Estado (UF)'" [controlId]="'uf'"
+                                                    [typeControl]="'text'" [isSubmitted]="userFormSubmitted"
+                                                    [messageError]="validateMessages" [form]="userForm" [mask]="'AA'"
+                                                    [controlInsance]="userControls.uf">
+                                                </input-validate>
                                             </div>
 
                                             <div class="col-md-5 form-group">
-                                                <label for="city">Cidade</label>
-                                                <input id="city" name="city" formControlName="city" type="text"
-                                                    class="form-control"
-                                                    [ngClass]="{ 'is-invalid': userFormSubmitted && userControls.city.errors }">
-                                                <div *ngIf="userFormSubmitted && userControls.city.errors"
-                                                    class="invalid-feedback">
-                                                    <div *ngIf="userControls.city.errors.required">Preencha a Cidade
-                                                    </div>
-                                                </div>
+                                                <input-validate [label]="'Cidade'" [controlId]="'city'"
+                                                    [typeControl]="'text'" [isSubmitted]="userFormSubmitted"
+                                                    [messageError]="validateMessages" [form]="userForm"
+                                                    [controlInsance]="userControls.city">
+                                                </input-validate>
                                             </div>
+
                                             <div class="col-md-4 form-group">
-                                                <label for="neighborhood">Bairro</label>
-                                                <input id="neighborhood" name="neighborhood"
-                                                    formControlName="neighborhood" type="text" class="form-control"
-                                                    [ngClass]="{ 'is-invalid': userFormSubmitted && userControls.neighborhood.errors }">
-                                                <div *ngIf="userFormSubmitted && userControls.neighborhood.errors"
-                                                    class="invalid-feedback">
-                                                    <div *ngIf="userControls.neighborhood.errors.required">Preencha o
-                                                        Bairro</div>
-                                                </div>
+                                                <input-validate [label]="'Bairro'" [controlId]="'neighborhood'"
+                                                    [typeControl]="'text'" [isSubmitted]="userFormSubmitted"
+                                                    [messageError]="validateMessages" [form]="userForm"
+                                                    [controlInsance]="userControls.neighborhood">
+                                                </input-validate>
                                             </div>
                                             <div class="col-md-8 form-group">
-                                                <label for="address">Rua/Av</label>
-                                                <input id="address" name="address" formControlName="address" type="text"
-                                                    class="form-control"
-                                                    [ngClass]="{ 'is-invalid': userFormSubmitted && userControls.address.errors }">
-                                                <div *ngIf="userFormSubmitted && userControls.address.errors"
-                                                    class="invalid-feedback">
-                                                    <div *ngIf="userControls.address.errors.required">Preencha o
-                                                        Endereço</div>
-                                                </div>
+                                                <input-validate [label]="'Rua/Av'" [controlId]="'address'"
+                                                    [typeControl]="'text'" [isSubmitted]="userFormSubmitted"
+                                                    [messageError]="validateMessages" [form]="userForm"
+                                                    [controlInsance]="userControls.address">
+                                                </input-validate>
                                             </div>
+
                                             <div class="col-md-3 form-group">
                                                 <label for="number">Número</label>
                                                 <input id="number" name="number" formControlName="number" type="text"
@@ -262,7 +233,7 @@
                                     </div>
                                     <div class="tab-pane" id="tab_3">
                                         <div class="row">
-                                            <div class="col-md-6 form-group">
+                                            <!-- <div class="col-md-6 form-group">
                                                 <label for="department">Departamento</label>
                                                 <input id="department" name="department" formControlName="department"
                                                     type="text" class="form-control"
@@ -283,29 +254,21 @@
                                                     <div *ngIf="userControls.role.errors.required">Preencha o Cargo
                                                     </div>
                                                 </div>
-                                            </div>
+                                            </div> -->
 
                                             <div class="col-md-8 form-group">
-                                                <label for="email">E-mail</label>
-                                                <input id="email" name="email" formControlName="email" type="text"
-                                                    class="form-control"
-                                                    [ngClass]="{ 'is-invalid': userFormSubmitted && userControls.email.errors }">
-                                                <div *ngIf="userFormSubmitted && userControls.email.errors"
-                                                    class="invalid-feedback">
-                                                    <div *ngIf="userControls.email.errors.required">Preencha o E-mail
-                                                    </div>
-                                                </div>
+                                                <input-validate [label]="'E-mail'" [controlId]="'email'"
+                                                    [typeControl]="'email'" [isSubmitted]="userFormSubmitted"
+                                                    [messageError]="validateMessages" [form]="userForm"
+                                                    [controlInsance]="userControls.email">
+                                                </input-validate>
                                             </div>
                                             <div class="col-md-4 form-group">
-                                                <label for="password">Senha</label>
-                                                <input id="password" name="password" formControlName="password"
-                                                    type="text" class="form-control"
-                                                    [ngClass]="{ 'is-invalid': userFormSubmitted && userControls.password.errors }">
-                                                <div *ngIf="userFormSubmitted && userControls.password.errors"
-                                                    class="invalid-feedback">
-                                                    <div *ngIf="userControls.password.errors.required">Preencha a Senha
-                                                    </div>
-                                                </div>
+                                                <input-validate [label]="'Senha'" [controlId]="'password'"
+                                                    [typeControl]="'password'" [isSubmitted]="userFormSubmitted"
+                                                    [messageError]="validateMessages" [form]="userForm"
+                                                    [controlInsance]="userControls.password">
+                                                </input-validate>
                                             </div>
                                             <div class="col-md-6">
                                                 <div class="icheck-primary">

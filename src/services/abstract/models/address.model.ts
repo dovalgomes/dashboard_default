@@ -1,5 +1,5 @@
 export class Address {
-    
+
     public zipCode: string;
     public uf: string;
     public city: string;

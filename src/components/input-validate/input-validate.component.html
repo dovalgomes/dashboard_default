@@ -1,0 +1,7 @@
+<div [formGroup]="form">
+    <label for="{{controlId}}">{{label}}</label>
+    <input id="{{controlId}}" name="{{controlId}}" formControlName="{{controlId}}" type="{{typeControl}}" class="form-control" [ngClass]="{'is-invalid': isSubmitted && controlInsance.errors}" mask="{{mask ? mask: ''}}" (blur)="onBlurEvent($event)">
+    <div *ngIf="isSubmitted && controlInsance.errors" class="invalid-feedback">
+        <span>{{getErrorMessage()}}</span>
+    </div>
+</div>
