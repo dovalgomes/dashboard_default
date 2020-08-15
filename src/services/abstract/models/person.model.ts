@@ -9,7 +9,7 @@ export class Person {
 
     public contact: Contact;
     public address: Address;
-    public business: Business;
+    // public business: Business;
 
 
     constructor() {
@@ -17,15 +17,15 @@ export class Person {
         this.lastName = '';
         this.contact = new Contact();
         this.address = new Address();
-        this.business = new Business();
+        // this.business = new Business();
     }
 
-    public create(firstName: string, lastName: string, contact: Contact, address: Address, business: Business) {
+    public create(firstName: string, lastName: string, contact: Contact, address: Address, business?: Business) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.contact = contact;
         this.address = address;
-        this.business = business;
+        // this.business = business;
     }
 
 

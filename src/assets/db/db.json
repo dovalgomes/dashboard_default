@@ -2,7 +2,7 @@
   "users": [
     {
       "id": 1,
-      "firstName": "Doval 1",
+      "firstName": "Doval",
       "lastName": "Gomes Guzzo",
       "phone": "27998780712",
       "department": "TI",
@@ -16,6 +16,22 @@
       "email": "dovalgomes93@gmail.com",
       "password": "1234",
       "admin": true,
+      "active": true
+    },
+    {
+      "id": 2,
+      "firstName": "Gabrielle",
+      "lastName": "Binda",
+      "phone": "12312312312",
+      "uf": "ES",
+      "city": "Vila Velha",
+      "neighborhood": "Itapuã",
+      "address": "Rua Guanabara",
+      "number": "S/N",
+      "zip_code": "29101-595",
+      "email": "gabrielle.binda@gmail.com",
+      "password": "1234",
+      "admin": false,
       "active": true
     }
   ]

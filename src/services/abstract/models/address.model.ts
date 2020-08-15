@@ -1,3 +1,5 @@
+import { MaskService } from 'ngx-mask';
+
 export class Address {
 
     public zipCode: string;
@@ -7,6 +9,7 @@ export class Address {
     public neighborhood: string;
     public address: string;
     public number: string;
+
 
     constructor() {
         this.uf = '';
@@ -27,6 +30,13 @@ export class Address {
     }
 
     public getAddressFormatted(): string {
-        return this.address + ', ' + this.number + ' - ' + this.neighborhood + ', ' + this.city + ' - ' + this.uf + ', ' + this.zipCode;
+
+        let cep = '';
+        if (this.zipCode) {
+            this.zipCode = this.zipCode.split('-').join('');
+            cep = this.zipCode.substring(0, 5) + '-' + this.zipCode.substring(5, 8);
+        }
+
+        return this.address + ', ' + this.number + ' - ' + this.neighborhood + ', ' + this.city + ' - ' + this.uf + ', ' + cep;
     }
 }

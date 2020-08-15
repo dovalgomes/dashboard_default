@@ -13,6 +13,7 @@ export class InputValidateComponent implements OnInit {
   @Input() controlId: string = '';
   @Input() typeControl: string = '';
   @Input() mask: string = '';
+  @Input() readonly: boolean = false;
 
   @Input() controlInsance: any;
   @Input() form: FormGroup;
@@ -36,14 +37,27 @@ export class InputValidateComponent implements OnInit {
   }
 
   getErrorMessage(): string {
-    let prop = '';
 
-    // tslint:disable-next-line: forin
-    for (const key in this.controlInsance.errors) {
-      prop = key;
+    if (!this.isSubmitted) {
+      let prop = '';
+
+      // tslint:disable-next-line: forin
+      for (const key in this.controlInsance.errors) {
+        prop = key;
+      }
+
+      console.log(prop);
+
+      const errors = this.messageError.filter(f => f.type === prop && this.controlId === f.id);
+
+      if (errors && errors.length > 0) {
+        return errors[0].message;
+      }
+
+      return '';
     }
 
-    return this.messageError.filter(f => f.type === prop && this.controlId === f.id)[0].message;
+    return '';
   }
 
 }

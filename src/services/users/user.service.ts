@@ -2,7 +2,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 
-import { retry, timeout, map, catchError } from 'rxjs/operators';
+import { map } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 
 import { Person } from '../abstract/models/person.model';
@@ -11,8 +11,6 @@ import { Business } from './../abstract/models/business.model';
 import { Contact } from './../abstract/models/contact.model';
 import { Login } from '../auth/models/login.model';
 import { User } from '../users/models/user.model';
-
-
 
 @Injectable()
 export class UserService {
@@ -73,6 +71,24 @@ export class UserService {
         );
     }
 
+    public post(user: User) {
+        const method: string = 'users';
+        const url = this.service + '/' + method;
+
+        let headers: HttpHeaders = new HttpHeaders();
+        headers = headers.set('ContentType', 'application/json');
+        headers = headers.set('Access-Control-Allow-Origin', '*');
+        headers = headers.set('charset', 'UTF-8');
+        headers = headers.set('X-Proxy-URL', url);
+
+        return this.http.post(url, this.sendUser(user), { headers, observe: 'response', responseType: 'json' }).pipe(
+            map((res: any) => {
+                const body = res.body;
+                return this.fillUser(body);
+            })
+        );
+    }
+
     public put(id: number, user: User) {
 
         const method: string = 'users';
@@ -124,8 +140,8 @@ export class UserService {
             firstName: user.person.firstName,
             lastName: user.person.lastName,
             phone: user.person.contact.phone,
-            department: user.person.business.department,
-            role: user.person.business.role,
+            // department: user.person.business.department,
+            // role: user.person.business.role,
             uf: user.person.address.uf,
             city: user.person.address.city,
             neighborhood: user.person.address.neighborhood,

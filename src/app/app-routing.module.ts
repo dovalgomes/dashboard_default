@@ -15,8 +15,8 @@ import { AdminGuard } from './../services/guards/admin.guard';
 
 const routes: Routes = [
   { path: '', component: LoginComponent, pathMatch: 'full' },
-  { path: 'login', component: AdminComponent, pathMatch: 'full' },
-  { path: 'main', component: AdminComponent, pathMatch: 'full', canActivate: [AuthGuard] },
+  { path: 'login', component: LoginComponent, pathMatch: 'full' },
+  { path: 'main', component: MainComponent, pathMatch: 'full', canActivate: [AuthGuard] },
   { path: 'admin', component: AdminComponent, pathMatch: 'full', canActivate: [AuthGuard, AdminGuard] }
 ];
 

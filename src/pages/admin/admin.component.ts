@@ -25,7 +25,7 @@ export class AdminComponent implements OnInit {
 
   public userDataPage: DataPaginate = new DataPaginate();
 
-  private user: User = new User();
+  public user: User = new User();
 
   public userForm: FormGroup;
   public userFormSubmitted: boolean = false;
@@ -47,7 +47,6 @@ export class AdminComponent implements OnInit {
     private readonly appProvider: AppProvider,
     private readonly userProvider: UserProvider,
     private readonly physicalAddressProvider: PhysicalAddressProvider
-    // private readonly formBuilder: FormBuilder
   ) {
 
   }
@@ -82,9 +81,13 @@ export class AdminComponent implements OnInit {
   }
 
   async onBlurCEP(event: any) {
-    const postalCode = event.target.value;
-    const _address: any = await this.physicalAddressProvider.getAddressByPostalCode(postalCode);
-    this.bindAddressValues(_address);
+    try {
+      const postalCode = event.target.value;
+      const _address: any = await this.physicalAddressProvider.getAddressByPostalCode(postalCode);
+      this.bindAddressValues(_address);
+    } catch (err) {
+      this.appProvider.showMessage('danger', 'Atenção', err.message);
+    }
   }
 
   async refresh() {
@@ -119,15 +122,19 @@ export class AdminComponent implements OnInit {
     $('#modal-user').modal('show');
   }
 
-  saveUser() {
-    this.userFormSubmitted = true;
-    this.userProvider.getUserFormValues(this.userForm);
+  async saveUser() {
+    try {
+      this.userFormSubmitted = true;
 
-    if (this.userForm.invalid) {
-      return;
+      if (this.userForm.invalid) {
+        return;
+      }
+
+      this.user = this.userProvider.getUserFormValues(this.userForm);
+      await this.userProvider.save(this.user);
+    } catch (err) {
+      this.appProvider.showMessage('danger', 'Atenção', err.message);
     }
-
-    alert('OK');
   }
 
   get userControls() {

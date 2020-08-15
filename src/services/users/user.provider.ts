@@ -92,8 +92,8 @@ export class UserProvider {
             firstName: [user.person.firstName, Validators.required],
             lastName: [user.person.lastName, Validators.required],
             phone: [user.person.contact.phone, Validators.required],
-            department: [user.person.business.department, Validators.required],
-            role: [user.person.business.role, Validators.required],
+            // department: [user.person.business.department, Validators.required],
+            // role: [user.person.business.role, Validators.required],
             uf: [user.person.address.uf, Validators.required],
             city: [user.person.address.city, Validators.required],
             neighborhood: [user.person.address.neighborhood, Validators.required],
@@ -129,8 +129,38 @@ export class UserProvider {
         user.person = person;
         user.login = login;
 
-        console.log(user);
         return user;
+    }
+
+    public save(user: User): Promise<User | boolean> {
+        return new Promise(resolve => {
+
+            console.log(user);
+
+            if (user.id === 0) {
+                this.userService.post(user).subscribe((_user: User) => {
+                    if (_user && _user.id) {
+                        resolve(_user);
+                    }
+
+                    resolve(false);
+                }, (err) => {
+                    console.log(err);
+                    this.appProvider.showMessage('warn', 'Atenção', err.message);
+                });
+            } else {
+                this.userService.put(user.id, user).subscribe((_user: User) => {
+                    if (_user) {
+                        resolve(_user);
+                    }
+
+                    resolve(false);
+                }, (err) => {
+                    console.log(err);
+                    this.appProvider.showMessage('warn', 'Atenção', err.message);
+                });
+            }
+        });
     }
 
 }
